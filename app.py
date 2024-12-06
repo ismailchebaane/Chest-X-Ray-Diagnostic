@@ -4,6 +4,18 @@ from torchvision import models, transforms
 from PIL import Image, UnidentifiedImageError
 import torch.nn as nn
 
+# Set page configuration and hide the sidebar and footer
+st.set_page_config(page_title="Chest X-Ray Diagnostic Tool", page_icon="🩺", layout="wide")
+st.markdown(
+    """
+    <style>
+    .css-1d391kg {display: none;}  # Hide sidebar
+    .footer {visibility: hidden;}   # Hide footer
+    </style>
+    """, 
+    unsafe_allow_html=True
+)
+
 # Define device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -48,7 +60,6 @@ def is_xray(image):
     return difference < threshold
 
 # Streamlit UI
-st.set_page_config(page_title="Chest X-Ray Diagnostic Tool", page_icon="🩺")
 st.title("AI for Healthcare: Chest X-Ray Diagnosis ")
 st.markdown("Upload an X-ray image to check if the person is healthy or sick.")
 
